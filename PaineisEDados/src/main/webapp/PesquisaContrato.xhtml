@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:dataTable value="#{cadastroContratoTreinamentoBean.contratos}" var="contrato"
+			rows="10" paginator="true" paginatorPosition="bottom" rowsPerPageTemplate="5, 10, 20, 30"
+			paginatorAlwaysVisible="false">
+			<p:column headerText="Razão Social">
+				<h:outputText value="#{contrato.razaoSocial}"/>
+			</p:column>
+			<p:column headerText="CNPJ">
+				<h:outputText value="#{contrato.cnpj}"/>
+			</p:column>
+			<p:column headerText="Cidade">
+				<h:outputText value="#{contrato.cidadeContrato}"/>
+			</p:column>
+			<p:column headerText="Modalidade">
+				<h:outputText value="#{contrato.modalidade}"/>
+			</p:column>
+			<p:column headerText="Data">
+				<h:outputText value="#{contrato.dataContrato}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Valor">
+				<h:outputText value="#{contrato.valorContrato}">
+					<f:convertNumber locale="pt_BR"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Metodo">
+				<h:outputText value="#{contrato.metodoPagamento}"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	
+</h:body>
+</html>

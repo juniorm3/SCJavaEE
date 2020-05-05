@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:messages />
+		
+			<h1> Cadasto de contrato de treinamentos </h1>
+			<p:tabView>
+				<p:tab title="Dados principais">
+					<p:panelGrid columns="2">
+						
+						<p:outputLabel value="Razão social" for="razaoSocial"/>
+						<p:inputText id="razaoSocial" value="#{cadastroContratoTreinamentoBean.razaoSocial}" required="true"/>
+						
+						<p:outputLabel value="CNPJ" for="cnpj"/>
+						<p:inputMask id="cnpj" value="#{cadastroContratoTreinamentoBean.cnpj}" 
+							mask="99.999.999/999-99" />
+						
+						<p:outputLabel value="Cidade do contrato" for="cidadeContrato"/>
+						<p:autoComplete id="cidadeContrato" value="#{cadastroContratoTreinamentoBean.cidadeContrato}" required="true"
+							completeMethod="#{cadastroContratoTreinamentoBean.sugerirCidades}"
+							forceSelection="true" minQueryLength="1"/>
+						
+						<p:outputLabel value="Modalidade" for="modalidade"/>
+						<p:selectOneRadio id="modalidade" value="#{cadastroContratoTreinamentoBean.modalidade}">
+							<f:selectItem itemLabel="EAD" itemValue="EAD"/>
+							<f:selectItem itemLabel="Presencial" itemValue="Presencial"/>
+						</p:selectOneRadio>
+						
+					</p:panelGrid>
+				</p:tab>
+					
+				<p:tab title="Contrato">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Data do contrato" for="dataContrato"/>
+						<p:calendar id="dataContrato" required="true" value="#{cadastroContratoTreinamentoBean.dataContrato}"
+							pattern="dd/MM/yyyy" locale="pt"/>
+						
+						<p:outputLabel value="Valor do contrato" for="valorContrato"/>
+						<p:inputNumber id="valorContrato" value="#{cadastroContratoTreinamentoBean.valorContrato}" 
+							decimalSeparator=","  placeholder="0,00"/>
+						
+						<p:outputLabel value="Método de pagamento" for="metodoPagamento"/>
+						<p:selectOneMenu id="metodoPagamento" value="#{cadastroContratoTreinamentoBean.metodoPagamento}" required="true">
+							<p:ajax event="change" process="@this" update="forma"
+								listener="#{cadastroContratoTreinamentoBean.carregarPagamentos}"/>
+						
+							<f:selectItem itemLabel="Selecione"/>
+							<f:selectItem itemLabel="Cartão de Credito" itemValue="Credito"/>
+							<f:selectItem itemLabel="Cheque" itemValue="Cheque"/>
+							<f:selectItem itemLabel="Boleto" itemValue="Boleto"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Forma de pagamento" for="forma"/>
+						<p:selectOneMenu id="forma" value="#{cadastroContratoTreinamentoBean.formaPagamento}">
+							<f:selectItem itemLabel="Selecione"/>
+							<f:selectItems value="#{cadastroContratoTreinamentoBean.pagamentos}" var="forma"
+								itemLabel="#{forma}" itemValue="#{forma}"/>
+						</p:selectOneMenu>
+						
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="Cursos">
+					<p:outputLabel value="Cursos Contratados" for="cursos"/>
+					<h:panelGroup />
+					<p:selectManyCheckbox id="cursos" value="#{cadastroContratoTreinamentoBean.cursosContratados}"
+						required="true" layout="pageDirection">
+						<f:selectItem itemLabel="Fundamentos Jaa e Orientação a Objetos" itemValue="1"/>
+						<f:selectItem itemLabel="Desenvolvimento Web com JSF 2" itemValue="2"/>
+						<f:selectItem itemLabel="Persistência de Dados com JPA 2 e Hibernate" itemValue="3"/>
+						<f:selectItem itemLabel="Gerenciamento Ágil de projetos com Scrum" itemValue="4"/>
+					</p:selectManyCheckbox>
+						<h:panelGrid />
+				</p:tab>
+				
+			</p:tabView>
+			
+			<h:panelGrid />
+			<p:commandButton value="Cadastrar" action="#{cadastroContratoTreinamentoBean.cadastrar}" update="@form"/>
+	</h:form>
+</h:body>
+</html>
