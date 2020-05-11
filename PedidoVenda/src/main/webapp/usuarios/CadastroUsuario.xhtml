@@ -34,6 +34,23 @@
 			
 		</p:panelGrid>
 		
+		<p:panelGrid columns="2" style="margin-top: 20px">
+			<p:selectOneMenu >
+				<f:selectItem itemLabel="Adiministradores"/>
+				<f:selectItem itemLabel="Auxiliares"/>
+				<f:selectItem itemLabel="Vendedores"/>
+			</p:selectOneMenu>
+			<p:commandButton value="Adicionar grupo" />
+		</p:panelGrid>
+		
+		<p:dataTable id="grupoTabela" value="" style="margin-top: 20px">
+			<p:column headerText="Grupo" style="text-align: left">
+				<h:outputText value=""/>
+			</p:column>
+			<p:column>
+			</p:column>
+		</p:dataTable>
+		
     </ui:define>
     
 </ui:composition>
