@@ -36,7 +36,35 @@
 			
 			<p:outputLabel value="E-mail" for="email"/>
 			<p:inputText id="email" size="40" maxlength="60"/>
+			
 		</p:panelGrid>
+
+		<p:panelGrid columns="2" style="width: 100%; margin-top: 20px">
+			<p:commandButton value="Adicionar Endereço"/>
+			<h:panelGroup />
+		</p:panelGrid>		
+
+		<p:dataTable id="enderecoTable" value="" style="margin-top: 20px">
+	    		<p:column headerText="Logradouro">
+		    		<h:outputText value="Rua das Pedras Grandes Azuis"/>
+		    	</p:column>
+		    	<p:column headerText="Número" style="text-align: left; width: 50px">
+		    		<h:outputText value="1234"/>
+		    	</p:column>
+	    		<p:column headerText="Complemento" style="text-align: left; width: 220px">
+		    		<h:outputText value="Ap 1022"/>
+		    	</p:column>
+		    	<p:column headerText="CEP" style="text-align: left; width: 100px">
+		    		<h:outputText value="38499-533"/>
+		    	</p:column>
+		    	<p:column headerText="Cidade/UF" style="text-align: left; width: 120px">
+		    		<h:outputText value="Uberlândia/MG"/>
+		    	</p:column>
+		    	<p:column style="text-align: center; width: 100px">
+	    			<p:button icon="ui-icon-pencil" title="Editar" />
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" />
+	    		</p:column>
+    	</p:dataTable>
 		
     </ui:define>
     

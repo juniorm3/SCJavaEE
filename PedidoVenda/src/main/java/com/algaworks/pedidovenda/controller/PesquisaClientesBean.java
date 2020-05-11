@@ -16,9 +16,7 @@ public class PesquisaClientesBean {
 		clientesFiltrados = new ArrayList<>();
 
 		Cliente cliente1 = new Cliente("Supermercado João das Couves Ltda", "Jurídica", "02.493.738/0001-83");
-
 		Cliente cliente2 = new Cliente("Maria Conceição da Abadia", "Física", "045.938.553-99");
-
 		Cliente cliente3 = new Cliente("Supermercado Preço Bom Ltda", "Jurídica", "08.111.344/0001-12");
 
 		clientesFiltrados.add(cliente1);
@@ -29,4 +27,5 @@ public class PesquisaClientesBean {
 	public List<Cliente> getClientesFiltrados() {
 		return clientesFiltrados;
 	}
+
 }
