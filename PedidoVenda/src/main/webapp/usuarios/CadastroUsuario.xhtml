@@ -43,12 +43,13 @@
 			<p:commandButton value="Adicionar grupo" />
 		</p:panelGrid>
 		
-		<p:dataTable id="grupoTabela" value="" style="margin-top: 20px">
+		<p:dataTable id="grupoTabela" value="#{cadastroUsuarioBean.grupos}" var="grupo" style="margin-top: 20px">
 			<p:column headerText="Grupo" style="text-align: left">
-				<h:outputText value=""/>
+				<h:outputText value="#{grupo}"/>
 			</p:column>
-			<p:column>
-			</p:column>
+			<p:column style="text-align: center; width: 100px">
+    			<p:commandButton icon="ui-icon-trash" title="Excluir" />
+	    	</p:column>
 		</p:dataTable>
 		
     </ui:define>
