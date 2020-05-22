@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	
+	<h:form id="frm">
+		
+		<p:commandButton value="Adiconar cliente" oncomplete="PF('inclusao').show()"/>
+		<p:dataTable value="#{clientesBean.clientes}" var="cliente" id="clientesTable"
+			emptyMessage="não existem clientes.">
+			<p:column headerText="Nome">
+				<h:outputText value="#{cliente.nome}"/>
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{cliente.telefone}"/>
+			</p:column>
+			<p:column width="40">
+				<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmacao').show()">
+					<f:setPropertyActionListener value="cliente" target="#{clientesBean.clienteSelecionado}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		
+		<p:confirmDialog header="Exclusão de cliente" 
+			message="Tem certeza que desja excluir o cliente?"
+			widgetVar="confirmacao">
+			
+			<p:commandButton value="Sim" update="clientesTable" oncomplete="PF('confirmacao').hide()" 
+				action="#{clientesBean.removerCliente}"/>
+			<p:button value="Não" onclick="PF('confirmacao').hide(); return false;"/>
+			
+		</p:confirmDialog>
+		
+		<p:confirmDialog header="Inclusão de cliente"  widgetVar="inclusao" message=" ">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome"/>
+				<p:inputText />
+				
+				<h:outputLabel value="Telefone"/>
+				<p:inputText size="10"/>
+			</h:panelGrid>
+			<p:commandButton value="Incluir" update="clientesTable" oncomplete="PF('inclusao').hide()" />			
+		</p:confirmDialog>
+	</h:form>
+	
+</h:body>
+</html>
