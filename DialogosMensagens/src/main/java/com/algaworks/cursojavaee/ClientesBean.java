@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,6 +15,7 @@ public class ClientesBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Cliente> clientes = new ArrayList<>();
 	private Cliente clienteSelecionado;
+	private Cliente cliente;
 
 	public ClientesBean() {
 		Cliente cliente = new Cliente("João da Silva", "34 999-000");
@@ -24,6 +26,19 @@ public class ClientesBean implements Serializable {
 
 		cliente = new Cliente("Sebastião Moreira Júnior", "34 3333-1111");
 		clientes.add(cliente);
+
+	}
+
+	@PostConstruct
+	public void init() {
+		if(cliente != null) {
+			cliente = new Cliente();			
+		}
+	}
+
+	public void incluirCliente() {
+		clientes.add(cliente);
+		cliente = null;
 	}
 
 	public void removerCliente() {
@@ -40,6 +55,14 @@ public class ClientesBean implements Serializable {
 
 	public void setClienteSelecionado(Cliente clienteSelecionado) {
 		this.clienteSelecionado = clienteSelecionado;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

@@ -8,6 +8,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 <h:body>
+
+	<script>
+		function tratarInclusaoProduto(args) {
+			if(!args.validationFailed) {
+				PF('inclusao').hide();
+			}
+		}
+	</script>
 	
 	<h:form id="frm">
 		
@@ -37,16 +45,26 @@
 			
 		</p:confirmDialog>
 		
-		<p:confirmDialog header="Inclusão de cliente"  widgetVar="inclusao" message=" ">
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Nome"/>
-				<p:inputText />
+		<p:dialog header="Inclusão de cliente"  widgetVar="inclusao" modal="true" resizable="false">
+			<h:panelGroup id="inclusaoPanel">
+				<p:messages />
 				
-				<h:outputLabel value="Telefone"/>
-				<p:inputText size="10"/>
-			</h:panelGrid>
-			<p:commandButton value="Incluir" update="clientesTable" oncomplete="PF('inclusao').hide()" />			
-		</p:confirmDialog>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Nome" for="nome"/>
+					<p:inputText id="nome" value="#{clientesBean.cliente.nome}" required="true"
+						requiredMessage="Informe o nome do cliente"/>
+					
+					<h:outputLabel value="Telefone" for="telefone"/>
+					<p:inputText id="telefone" value="#{clientesBean.cliente.telefone}" required="true" 
+					 	requiredMessage="Informe o numero do telefone" size="10" />
+			
+				</h:panelGrid>
+				
+				<p:commandButton value="Incluir"  action="#{clientesBean.incluirCliente}"
+					update="clientesTable inclusaoPanel" 
+					oncomplete="tratarInclusaoProduto(args)"/>			
+			</h:panelGroup>
+		</p:dialog>
 	</h:form>
 	
 </h:body>
