@@ -70,9 +70,15 @@
 		    	</p:column>
 		    	<p:column style="text-align: center; width: 100px">
 	    			<p:button icon="ui-icon-pencil" title="Editar" />
-	    			<p:commandButton icon="ui-icon-trash" title="Excluir" />
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show();"/>
 	    		</p:column>
     	</p:dataTable>
+    	
+    	<p:confirmDialog header="Exclusão de endereço" message="Tem certeza que deseja excluir o endereço?" 
+	    		widgetVar="confirmacaoExclusao">
+    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;"/>
+    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide(); return false;"/>
+    	</p:confirmDialog>
     	
     	<p:dialog header="Inclusão de endereço" widgetVar="inclusaoEnderecoDialog"
     		modal="true" resizable="false">
