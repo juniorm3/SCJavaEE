@@ -8,6 +8,14 @@
     <ui:define name="titulo">Novo cliente</ui:define>
     
     <ui:define name="corpo">
+    	<script>
+    		function tratarInclusaoEndereco(args) {
+    			if(!args.validationFailed){
+    				PF('inclusaoEnderecoDialog').hide();
+    			}
+    		}
+    	</script>
+    
 		<h1>Novo cliente</h1>
 		
 		<p:toolbar style="margin-top: 20px">
@@ -40,7 +48,7 @@
 		</p:panelGrid>
 
 		<p:panelGrid columns="2" style="width: 100%; margin-top: 20px">
-			<p:commandButton value="Adicionar Endereço"/>
+			<p:button value="Adicionar Endereço" onclick="PF('inclusaoEnderecoDialog').show(); return false;"/>
 			<h:panelGroup />
 		</p:panelGrid>		
 
@@ -65,6 +73,39 @@
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" />
 	    		</p:column>
     	</p:dataTable>
+    	
+    	<p:dialog header="Inclusão de endereço" widgetVar="inclusaoEnderecoDialog"
+    		modal="true" resizable="false">
+    		<h:panelGroup id="inclusaoEndereco">
+    			<p:messages />
+    			
+    			<h:panelGrid columns="2">
+    				<p:outputLabel value="Logradouro" for="logradouro"/>
+    				<p:inputText id="logradouro" size="45"/>
+    				
+    				<p:outputLabel value="Número" for="numero"/>
+    				<p:inputText id="numero" size="10"/>
+    				
+    				<p:outputLabel value="Complemento" for="complemento"/>
+    				<p:inputText id="complemento" size="25"/>
+    				
+    				<p:outputLabel value="CEP" for="cep"/>
+    				<p:inputText id="cep" size="15"/>
+    				
+   					<p:outputLabel value="Cidade" for="cidade"/>
+   					<h:panelGroup>
+	   					<p:inputText id="cidade" size="25"/>
+	   					
+	   					<p:outputLabel value="UF" for="uf"/>
+	   					<p:inputText id="uf" size="5"/>   					
+   					</h:panelGroup>
+   					
+    				<h:outputLabel />
+    				<p:commandButton value="Incluir" oncomplete="tratarInclusaoEndereco(args)"/>
+    				
+    			</h:panelGrid>
+    		</h:panelGroup>
+    	</p:dialog>
 		
     </ui:define>
     
