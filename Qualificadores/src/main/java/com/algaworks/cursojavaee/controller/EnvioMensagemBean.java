@@ -1,7 +1,6 @@
 package com.algaworks.cursojavaee.controller;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 
