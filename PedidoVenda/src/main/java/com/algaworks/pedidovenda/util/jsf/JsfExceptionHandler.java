@@ -54,7 +54,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
 					FacesUtil.addErrorMesage(negocioException.getMessage());
 				} else {
 					handled = true;
-					log.error("Ero de sistema: " + exception.getMessage(), exception);
+					log.error("Erro de sistema: " + exception.getMessage(), exception);
 					redirect("/Erro.xhtml");
 				}
 			} finally {
