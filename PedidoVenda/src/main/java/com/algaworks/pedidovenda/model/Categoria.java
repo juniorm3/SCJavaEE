@@ -1,6 +1,8 @@
 package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Categoria implements Serializable {
 
@@ -9,6 +11,7 @@ public class Categoria implements Serializable {
 	private Long id;
 	private String descricao;
 	private Categoria categoriaPai;
+	private List<Categoria> subCategoria = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -32,6 +35,14 @@ public class Categoria implements Serializable {
 
 	public void setCategoriaPai(Categoria categoriaPai) {
 		this.categoriaPai = categoriaPai;
+	}
+
+	public List<Categoria> getSubCategoria() {
+		return subCategoria;
+	}
+
+	public void setSubCategoria(List<Categoria> subCategoria) {
+		this.subCategoria = subCategoria;
 	}
 
 	@Override
