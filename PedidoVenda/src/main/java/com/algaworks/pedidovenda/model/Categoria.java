@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -34,7 +35,7 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 60)
 	public String getDescricao() {
 		return descricao;
 	}
@@ -44,6 +45,7 @@ public class Categoria implements Serializable {
 	}
 
 	@ManyToOne
+	@JoinColumn(name = "categoria_pai_id")
 	public Categoria getCategoriaPai() {
 		return categoriaPai;
 	}
@@ -52,7 +54,7 @@ public class Categoria implements Serializable {
 		this.categoriaPai = categoriaPai;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "categoriaPai", cascade = CascadeType.ALL)
 	public List<Categoria> getSubCategoria() {
 		return subCategoria;
 	}

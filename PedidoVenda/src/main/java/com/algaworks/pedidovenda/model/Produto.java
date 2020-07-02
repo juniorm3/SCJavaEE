@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,7 +34,7 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 80)
 	public String getNome() {
 		return nome;
 	}
@@ -42,7 +43,7 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	@Column(nullable = false, unique = true, length = 40)
+	@Column(nullable = false, length = 20, unique = true)
 	public String getSku() {
 		return sku;
 	}
@@ -60,7 +61,7 @@ public class Produto implements Serializable {
 		this.valorUnitario = valorUnitario;
 	}
 
-	@Column(name = "quantidade_estoque")
+	@Column(name = "quantidade_estoque", nullable = false, length = 5)
 	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
@@ -70,6 +71,7 @@ public class Produto implements Serializable {
 	}
 
 	@ManyToOne
+	@JoinColumn(name = "categaoria_id", nullable = false)
 	public Categoria getCategoria() {
 		return categoria;
 	}

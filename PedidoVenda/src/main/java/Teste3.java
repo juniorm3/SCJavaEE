@@ -18,25 +18,25 @@ public class Teste3 {
 
 		trx.begin();
 
-		Categoria categoriaPai = new Categoria();
-		categoriaPai.setDescricao("Bebidas");
-		
-		Categoria categoriaFilha = new Categoria();
-		categoriaFilha.setDescricao("Refrigerantes");
-		categoriaFilha.setCategoriaPai(categoriaPai);
-		
-		categoriaPai.getSubCategoria().add(categoriaFilha);
-		
-		manager.persist(categoriaPai);
-		
-		Produto produto = new Produto();
-		produto.setCategoria(categoriaFilha);
-		produto.setNome("Guaraná 2L");
-		produto.setQuantidadeEstoque(10);
-		produto.setSku("GUA00123");
-		produto.setValorUnitario(new BigDecimal(2.21));
-		
-		manager.persist(produto);
+//		Categoria categoriaPai = new Categoria();
+//		categoriaPai.setDescricao("Bebidas");
+//		
+//		Categoria categoriaFilha = new Categoria();
+//		categoriaFilha.setDescricao("Refrigerantes");
+//		categoriaFilha.setCategoriaPai(categoriaPai);
+//		
+//		categoriaPai.getSubCategoria().add(categoriaFilha);
+//		
+//		manager.persist(categoriaPai);
+//		
+//		Produto produto = new Produto();
+//		produto.setCategoria(categoriaFilha);
+//		produto.setNome("Guaraná 2L");
+//		produto.setQuantidadeEstoque(10);
+//		produto.setSku("GUA00123");
+//		produto.setValorUnitario(new BigDecimal(2.21));
+//		
+//		manager.persist(produto);
 		
 		trx.commit();
 	}
